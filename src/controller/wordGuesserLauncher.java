@@ -9,12 +9,24 @@ import java.util.Scanner;
 
 public class wordGuesserLauncher {
     public static void main(String[] args) {
+        String[] wordOptions = {
+            "one",
+            "two",
+            "three",
+            "four",
+            "five"
+        };
+
         String wordToGuess;
-        wordToGuess = "four";
+
+        int randomNumber = (int) (Math.random() * (wordOptions.length - 1));
+        wordToGuess = wordOptions[randomNumber];
+
 
         Scanner keyboardScanner = new Scanner(System.in);
         String userGuess = "";
         System.out.println("\n**********");
+        System.out.println("Your word has " + wordToGuess.length() + " characters.");
         System.out.println("Give your best guess:");
         
         while (!userGuess.equals(wordToGuess)) {
@@ -44,7 +56,9 @@ public class wordGuesserLauncher {
                 }
             }
             String correctLetters = stringBuilder.toString();
-            System.out.println(correctLetters);
+            if (correctLetters.contains("-")) {
+                System.out.println(correctLetters);
+            }
         }
 
         keyboardScanner.close();
