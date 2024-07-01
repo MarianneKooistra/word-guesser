@@ -18,6 +18,18 @@ public class wordGuesserLauncher {
         System.out.println("Give your best guess:");
 
         userGuess = keyboardScanner.nextLine();
+        while (userGuess.length() != wordToGuess.length()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder   .append("The word is ")
+                            .append(wordToGuess.length())
+                            .append(" characters long, your guess was ")
+                            .append(userGuess.length())
+                            .append(" characters long.");
+            String lengthMessage = stringBuilder.toString();
+            System.out.println(lengthMessage);
+            System.out.println("Try again: ");
+            userGuess = keyboardScanner.nextLine();
+        }
         keyboardScanner.close();
 
         System.out.println("The word was\t ... \t" + wordToGuess + "!");
