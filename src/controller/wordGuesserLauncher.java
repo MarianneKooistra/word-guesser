@@ -13,33 +13,42 @@ public class wordGuesserLauncher {
         wordToGuess = "four";
 
         Scanner keyboardScanner = new Scanner(System.in);
-        String userGuess;
+        String userGuess = "";
         System.out.println("\n**********");
         System.out.println("Give your best guess:");
-
-        userGuess = keyboardScanner.nextLine();
-        while (userGuess.length() != wordToGuess.length()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder   .append("The word is ")
-                            .append(wordToGuess.length())
-                            .append(" characters long, your guess was ")
-                            .append(userGuess.length())
-                            .append(" characters long.");
-            String lengthMessage = stringBuilder.toString();
-            System.out.println(lengthMessage);
-            System.out.println("Try again: ");
+        
+        while (!userGuess.equals(wordToGuess)) {
             userGuess = keyboardScanner.nextLine();
+            
+            while (userGuess.length() != wordToGuess.length()) {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder   .append("The word is ")
+                                .append(wordToGuess.length())
+                                .append(" characters long, your guess was ")
+                                .append(userGuess.length())
+                                .append(" characters long.");
+                String lengthMessage = stringBuilder.toString();
+
+                System.out.println(lengthMessage);
+                System.out.println("Try again: ");
+                userGuess = keyboardScanner.nextLine();
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < userGuess.length(); i++) {
+                if (userGuess.charAt(i) == wordToGuess.charAt(i)) {
+                    stringBuilder.append(userGuess.charAt(i));
+                }
+                else {
+                    stringBuilder.append("-");
+                }
+            }
+            String correctLetters = stringBuilder.toString();
+            System.out.println(correctLetters);
         }
+
         keyboardScanner.close();
 
-        System.out.println("The word was\t ... \t" + wordToGuess + "!");
-        System.out.println("Your guess was\t ... \t" + userGuess);
-
-        if (wordToGuess.equals(userGuess)) {
-            System.out.println("Congratulations! You guessed correct.\n");
-        }
-        else {
-            System.out.println("I'm sorry, your guess was incorrect.\n");
-        }
+        System.out.println("\nCongratulations! You guessed correct.\n");        
     }
 }
