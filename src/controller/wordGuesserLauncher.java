@@ -20,7 +20,14 @@ public class wordGuesserLauncher {
         userGuess = keyboardScanner.nextLine();
         keyboardScanner.close();
 
-        System.out.println("The word was ... \t" + wordToGuess + "!");
-        System.out.println("Your guess was ... \t" + userGuess);
+        System.out.println("The word was\t ... \t" + wordToGuess + "!");
+        System.out.println("Your guess was\t ... \t" + userGuess);
+
+        if (wordToGuess.equals(userGuess)) {
+            System.out.println("Congratulations! You guessed correct.\n");
+        }
+        else {
+            System.out.println("I'm sorry, your guess was incorrect.\n");
+        }
     }
 }
