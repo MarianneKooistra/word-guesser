@@ -7,6 +7,8 @@ import java.util.Scanner;
 * A little game to guess a words, like Wordle, Lingo or Mastermind.
 */
 
+// TODO: Work laptop needs the extension package for java.
+
 public class wordGuesserLauncher {
     public static void main(String[] args) {
         String[] wordOptions = {
@@ -22,14 +24,17 @@ public class wordGuesserLauncher {
         int randomNumber = (int) (Math.random() * (wordOptions.length - 1));
         wordToGuess = wordOptions[randomNumber];
 
-
         Scanner keyboardScanner = new Scanner(System.in);
         String userGuess = "";
+        int attempts = 0;
+
+
         System.out.println("\n**********");
         System.out.println("Your word has " + wordToGuess.length() + " characters.");
         System.out.println("Give your best guess:");
         
         while (!userGuess.equals(wordToGuess)) {
+            attempts++;
             userGuess = keyboardScanner.nextLine();
             
             while (userGuess.length() != wordToGuess.length()) {
@@ -63,6 +68,7 @@ public class wordGuesserLauncher {
 
         keyboardScanner.close();
 
-        System.out.println("\nCongratulations! You guessed correct.\n");        
+        System.out.println("\nCongratulations! You guessed correct.\n");
+        System.out.println("It took you " + attempts + " attempts!");
     }
 }

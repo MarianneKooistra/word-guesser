@@ -1,0 +1,7 @@
+1. Keep track of what letters were guessed correctly.
+
+2. More word options from a dictionary or a csv or json or text source file.
+
+3. limited attempts (I would like to make this a separate brach and a different type of game.)
+
+4. Keep record in of stats in a text file, per session.
