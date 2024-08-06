@@ -69,6 +69,6 @@ public class wordGuesserLauncher {
         keyboardScanner.close();
 
         System.out.println("\nCongratulations! You guessed correct.\n");
-        System.out.println("It took you " + attempts + " attempts!");
+        System.out.println("It took you " + attempts + ((attempts < 2) ? " attempt!" : " attempts!"));
     }
 }
