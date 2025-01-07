@@ -7,8 +7,6 @@ import java.util.Scanner;
 * A little game to guess a words, like Wordle, Lingo or Mastermind.
 */
 
-// TODO: Work laptop needs the extension package for java.
-
 public class wordGuesserLauncher {
     public static void main(String[] args) {
         String[] wordOptions = {
@@ -28,6 +26,10 @@ public class wordGuesserLauncher {
         String userGuess = "";
         int attempts = 0;
 
+        StringBuilder stringBuilderCorrectLetters = new StringBuilder();
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            stringBuilderCorrectLetters.append("-");
+        }
 
         System.out.println("\n**********");
         System.out.println("Your word has " + wordToGuess.length() + " characters.");
@@ -38,29 +40,26 @@ public class wordGuesserLauncher {
             userGuess = keyboardScanner.nextLine();
             
             while (userGuess.length() != wordToGuess.length()) {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder   .append("The word is ")
+                StringBuilder stringBuilderLength = new StringBuilder();
+                stringBuilderLength.append("The word is ")
                                 .append(wordToGuess.length())
                                 .append(" characters long, your guess was ")
                                 .append(userGuess.length())
                                 .append(" characters long.");
-                String lengthMessage = stringBuilder.toString();
+                String lengthMessage = stringBuilderLength.toString();
 
                 System.out.println(lengthMessage);
                 System.out.println("Try again: ");
                 userGuess = keyboardScanner.nextLine();
             }
 
-            StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < userGuess.length(); i++) {
                 if (userGuess.charAt(i) == wordToGuess.charAt(i)) {
-                    stringBuilder.append(userGuess.charAt(i));
-                }
-                else {
-                    stringBuilder.append("-");
+                    stringBuilderCorrectLetters.setCharAt(i, userGuess.charAt(i));
                 }
             }
-            String correctLetters = stringBuilder.toString();
+            
+            String correctLetters = stringBuilderCorrectLetters.toString();
             if (correctLetters.contains("-")) {
                 System.out.println(correctLetters);
             }
