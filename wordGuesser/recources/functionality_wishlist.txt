@@ -1,6 +1,6 @@
 Complete! 1. Keep track of what letters were guessed correctly.
 
-2. Separate into smaller methodes.
+Complete! 2. Separate into smaller methodes.
 
 3. More word options from a dictionary or a csv or json or text source file.
 
