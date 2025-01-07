@@ -1,7 +1,11 @@
-1. Keep track of what letters were guessed correctly.
+Complete! 1. Keep track of what letters were guessed correctly.
 
-2. More word options from a dictionary or a csv or json or text source file.
+2. Separate into smaller methodes.
 
-3. limited attempts (I would like to make this a separate brach and a different type of game.)
+3. More word options from a dictionary or a csv or json or text source file.
 
-4. Keep record in of stats in a text file, per session.
+4. Limited attempts (I would like to make this a separate brach and a different type of game.)
+
+5. Add a frontend using one of the well known frameworks.
+
+6. Keep record in of stats in a text file, per session.
