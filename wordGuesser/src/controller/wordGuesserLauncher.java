@@ -1,5 +1,10 @@
 package controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -23,11 +28,11 @@ public class wordGuesserLauncher {
         System.out.println("\n**********");
         System.out.println("Your word has " + wordToGuess.length() + " characters.");
         System.out.println("Give your best guess:");
-        
+
         while (!userGuess.equals(wordToGuess)) {
             attempts++;
             userGuess = keyboardScanner.nextLine();
-            
+
             while (userGuess.length() != wordToGuess.length()) {
                 showMessageForLengthDiscrepancy(wordToGuess, userGuess);
                 userGuess = keyboardScanner.nextLine();
@@ -58,10 +63,10 @@ public class wordGuesserLauncher {
     private static void showMessageForLengthDiscrepancy(String wordToGuess, String userGuess) {
         StringBuilder stringBuilderLength = new StringBuilder();
         stringBuilderLength.append("The word is ")
-                        .append(wordToGuess.length())
-                        .append(" characters long, your guess was ")
-                        .append(userGuess.length())
-                        .append(" characters long.");
+            .append(wordToGuess.length())
+            .append(" characters long, your guess was ")
+            .append(userGuess.length())
+            .append(" characters long.");
         String lengthMessage = stringBuilderLength.toString();
 
         System.out.println(lengthMessage);
@@ -69,18 +74,51 @@ public class wordGuesserLauncher {
     }
 
     private static String getWordToGuess() {
-        String[] wordOptions = {
-            "one",
-            "two",
-            "three",
-            "four",
-            "five"
-        };
+        HashMap<String, List<String>> themeWordMap = new HashMap<>();
+        File guessWordsFile = new File("resources" + File.separator + "guessable_words.txt");
 
-        String wordToGuess;
+        try (Scanner fileReader = new Scanner(guessWordsFile)) {
+            String theme = "";
+            List<String> words = new ArrayList<String>();
 
-        int randomNumber = (int) (Math.random() * (wordOptions.length - 1));
-        wordToGuess = wordOptions[randomNumber];
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine().trim();
+
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                if (line.startsWith("wordTheme")) {
+                    if (!theme.isEmpty()) {
+                        themeWordMap.put(theme, new ArrayList<>(words));
+                        words.clear();
+                    }
+                    theme = line.split("=")[1];
+                } else {
+                    words.add(line);
+                }
+            }
+            themeWordMap.put(theme, words);
+
+        } catch (FileNotFoundException exc) {
+            System.out.println("File not found error occurred.");
+        }
+    
+        List<String> themeOptions = new ArrayList<String>(themeWordMap.keySet());
+        String gameTheme = getRandomFromList(themeOptions);
+
+        System.out.println("Theme of you word is: " + gameTheme);
+
+        List<String> wordOptions = themeWordMap.get(gameTheme);
+        String wordToGuess = getRandomFromList(wordOptions);
+
         return wordToGuess;
+    }
+
+    private static String getRandomFromList(List<String> list) {
+        int randomNumber = (int) (Math.random() * (list.size() - 1));
+        String randomItem = list.get(randomNumber);
+
+        return randomItem;
     }
 }
